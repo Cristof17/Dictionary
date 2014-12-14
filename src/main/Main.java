@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import word.Entry;
 
 public class Main {
 
@@ -19,12 +18,12 @@ public class Main {
 		 * Read the arguments 
 		 */
 		
-		MyHashMapImpl<Integer, String> hashMap = new MyHashMapImpl<Integer,String>(Integer.parseInt(args[0]));
+		MyHashMapImpl<String, String> hashMap = new MyHashMapImpl<String,String>(Integer.parseInt(args[0]));
 		File fisierLista = new File(args[1]);
 		File fisierInterogari = new File(args[2]);
 		File fisierOut = new File(args[3]);
 	
-		
+		readDefinitions(hashMap, fisierLista);
 		
 		
 	}

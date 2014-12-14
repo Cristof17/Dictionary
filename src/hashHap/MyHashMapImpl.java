@@ -15,6 +15,10 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 	}
 	
 	private void initializeArray() {
+		
+		if(array == null)
+			array = new ArrayList<MyHashMap.Bucket<K,V>> ();
+		
 		for(int i= 0 ; i < numberOfBuckets ; i++)
 			array.add(new Bucket<K,V>() {
 				
