@@ -1,6 +1,5 @@
 package hashHap;
 
-import hashHap.MyHashMap.Entry;
 
 import java.util.ArrayList;
 import java.util.List;

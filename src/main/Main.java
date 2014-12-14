@@ -60,7 +60,7 @@ public class Main {
 			for(int i = 0 ; i < N ; i ++){
 				word = reader.readLine() ;
 				definition = reader.readLine();
-				entries.add(new Entry(word , definition));
+				hashMap.put(word, definition);
 			
 			}
 		} catch (IOException e) {
@@ -68,7 +68,5 @@ public class Main {
 			System.err.println("File  not found");
 		}
 		
-		
-		return entries ;
 	}
 }
