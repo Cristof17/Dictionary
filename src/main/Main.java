@@ -26,6 +26,7 @@ public class Main {
 		readDefinitions(hashMap, fisierLista);
 		
 		
+		
 	}
 	
 	private static void readDefinitions(MyHashMapImpl<String,String> hashMap ,File file){

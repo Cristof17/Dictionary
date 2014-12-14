@@ -63,11 +63,15 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 					
 					//remove the rest of the words if there are any with 
 					//the same values as the one deleted ;
-					for(Entry<K,V> e : words)
-						if(entry.equals(e))
-							words.remove(e);
 					
 					return entry.getValue();
+				}
+
+
+
+				@Override
+				public int getSize() {
+					return words.size() ;
 				}
 				
 			});
@@ -90,7 +94,14 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 
 	@Override
 	public V remove(K key) {
-		return array.get(translate(key.hashCode())).remove(key);
+		int position = translate(key.hashCode());
+		Bucket<K,V> bucket = array.get(position);
+		
+		V value = bucket.remove(key);
+		while(bucket.getSize() != 0)
+			bucket.remove(key);
+		
+		return value;
 	}
 
 	@Override

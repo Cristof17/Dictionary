@@ -101,5 +101,7 @@ public interface MyHashMap<K, V> {
 		public void addEntry(K key , V value );
 		
 		public V remove(K key);
+		
+		public int getSize();
 	}
 }
