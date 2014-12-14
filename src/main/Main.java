@@ -24,10 +24,11 @@ public class Main {
 		File fisierInterogari = new File(args[2]);
 		File fisierOut = new File(args[3]);
 		
-		ArrayList<Entry> Entrys = null ;
-		readDefinitions(Entrys , fisierLista );
+		ArrayList<Entry> entries = new ArrayList<Entry>() ;
+		readDefinitions(entries , fisierLista );
 		
-	
+		if(0 == 0 )
+			System.out.println("da");
 		
 	}
 	
@@ -58,10 +59,14 @@ public class Main {
 			/*
 			 * Now read the next N lines
 			 */
-			line_scanner = new Scanner(reader.readLine());
+			String word ;
+			String definition ;
+			
 			for(int i = 0 ; i < N ; i ++){
-				entries.add(new Entry(line_scanner.next(),line_scanner.next()));
-				line_scanner = new Scanner(reader.readLine());
+				word = reader.readLine() ;
+				definition = reader.readLine();
+				entries.add(new Entry(word , definition));
+			
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
