@@ -99,5 +99,7 @@ public interface MyHashMap<K, V> {
 		public Entry<K,V> getElement(K key);
 		
 		public void addEntry(K key , V value );
+		
+		public V remove(K key);
 	}
 }

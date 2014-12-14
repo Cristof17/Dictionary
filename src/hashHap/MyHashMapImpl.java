@@ -51,6 +51,21 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 					
 					words.add(to_add); // add an entry to the bucket			
 				}
+
+
+
+				@Override
+				public V remove(K key) {
+					Entry<K,V> entry = words.remove(0);
+					
+					//remove the rest of the words if there are any with 
+					//the same values as the one deleted ;
+					for(Entry<K,V> e : words)
+						if(entry.equals(e))
+							words.remove(e);
+					
+					return entry.getValue();
+				}
 				
 			});
 		
@@ -72,20 +87,17 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 
 	@Override
 	public V remove(K key) {
-		// TODO Auto-generated method stub
-		return null;
+		return array.get(translate(key.hashCode())).remove(key);
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return numberOfBuckets;
 	}
 
 	@Override
 	public List<? extends hashHap.MyHashMap.Bucket<K, V>> getBuckets() {
-		// TODO Auto-generated method stub
-		return null;
+		return array;
 	}
 	
 	private int translate(int hashCode){
