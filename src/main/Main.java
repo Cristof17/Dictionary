@@ -23,18 +23,13 @@ public class Main {
 		File fisierLista = new File(args[1]);
 		File fisierInterogari = new File(args[2]);
 		File fisierOut = new File(args[3]);
+	
 		
-		ArrayList<Entry> entries = new ArrayList<Entry>() ;
-		readDefinitions(entries , fisierLista );
 		
-		if(0 == 0 )
-			System.out.println("da");
 		
 	}
 	
-	private static ArrayList<Entry> readDefinitions(ArrayList<Entry> entries ,File file){
-		if(entries == null )
-			entries = new ArrayList<Entry>();
+	private static void readDefinitions(MyHashMapImpl<String,String> hashMap ,File file){
 		FileReader stream = null;
 		
 		int N =0, M = 0 ;

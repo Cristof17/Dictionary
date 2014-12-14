@@ -1,4 +1,5 @@
 package hashHap;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,11 +87,17 @@ public interface MyHashMap<K, V> {
 	 */
 	public static interface Bucket<K, V> {
 		
+		
+
 		/**
 		 * Intoarce lista de intrari continute de acest bucket.
 		 * 
 		 * @return
 		 */
 		public List<? extends Entry<K, V>> getEntries();
+		
+		public Entry<K,V> getElement(K key);
+		
+		public void addEntry(K key , V value );
 	}
 }
