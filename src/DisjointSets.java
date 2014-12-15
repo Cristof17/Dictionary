@@ -1,4 +1,4 @@
-import hashHap.MyHashMap;
+import hashMap.MyHashMap;
 
 import java.util.ArrayList;
 
@@ -15,8 +15,11 @@ public class DisjointSets<T> {
 		}
  	}
 	
-	public void addElement(T elem) {
+	public DisjointSets() {
 		
+	}
+	public void addElement(T elem) {
+		Entry<T> new_entry = new Entry<T>(elem);
 	}
 	
 	public void mergeSetsOf(T e1, T e2) {
@@ -27,7 +30,4 @@ public class DisjointSets<T> {
 		return null;
 	}
 	
-	public DisjointSets() {
-		
-	}
 }

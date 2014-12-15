@@ -1,11 +1,12 @@
 package main;
 
-import hashHap.MyHashMapImpl;
+import hashMap.MyHashMapImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,6 +26,10 @@ public class Main {
 	
 		readDefinitions(hashMap, fisierLista);
 		
+		int definitions =  hashMap.getDefinitionsCount("mic");
+		
+		if(0 == 0 )
+			System.out.println("da");
 		
 		
 	}

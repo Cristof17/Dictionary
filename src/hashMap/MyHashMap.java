@@ -1,4 +1,4 @@
-package hashHap;
+package hashMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,5 +103,7 @@ public interface MyHashMap<K, V> {
 		public V remove(K key);
 		
 		public int getSize();
+		
+		public int getNumberOfDefinitions(K key);
 	}
 }
