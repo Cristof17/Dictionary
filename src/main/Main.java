@@ -19,14 +19,13 @@ public class Main {
 		 * Read the arguments 
 		 */
 		
-		MyHashMapImpl<String, String> hashMap = new MyHashMapImpl<String,String>(Integer.parseInt(args[0]));
+		MyHashMapImpl<String, ArrayList<String>> hashMap = new MyHashMapImpl<String,ArrayList<String>>(Integer.parseInt(args[0]));
 		File fisierLista = new File(args[1]);
 		File fisierInterogari = new File(args[2]);
 		File fisierOut = new File(args[3]);
 	
 		readDefinitions(hashMap, fisierLista);
 		
-		int definitions =  hashMap.getDefinitionsCount("mic");
 		
 		if(0 == 0 )
 			System.out.println("da");
@@ -34,7 +33,7 @@ public class Main {
 		
 	}
 	
-	private static void readDefinitions(MyHashMapImpl<String,String> hashMap ,File file){
+	private static void readDefinitions(MyHashMapImpl<String,ArrayList<String>> hashMap ,File file){
 		FileReader stream = null;
 		
 		int N =0, M = 0 ;
@@ -63,9 +62,17 @@ public class Main {
 			String definition ;
 			
 			for(int i = 0 ; i < N ; i ++){
+				
 				word = reader.readLine() ;
 				definition = reader.readLine();
-				hashMap.put(word, definition);
+				
+				if(hashMap.get(word) != null && hashMap.get(word).size() != 0){
+					hashMap.get(word).add(definition);
+				}else{
+					ArrayList<String> definitions = new ArrayList<String>();
+					definitions.add(definition);
+					hashMap.put(word, definitions);
+				}
 			
 			}
 		} catch (IOException e) {

@@ -1,5 +1,4 @@
 package hashMap;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +61,7 @@ public interface MyHashMap<K, V> {
 	 */
 	public static interface Entry<K, V> {
 		
+		
 		/**
 		 * Intoarce cheia intrarii.
 		 * 
@@ -104,6 +104,5 @@ public interface MyHashMap<K, V> {
 		
 		public int getSize();
 		
-		public int getNumberOfDefinitions(K key);
 	}
 }

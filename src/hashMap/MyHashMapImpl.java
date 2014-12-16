@@ -3,10 +3,11 @@ package hashMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import hashMap.MyHashMap.Bucket;;
 
 public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 
-	private ArrayList<Bucket<K,V>> array;
+	private ArrayList<Bucket<K,V>>array;
 	private int numberOfBuckets ;
 	
 	public MyHashMapImpl(int length){
@@ -17,7 +18,7 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 	private void initializeArray() {
 		
 		if(array == null)
-			array = new ArrayList<MyHashMap.Bucket<K,V>> ();
+			array = new ArrayList<Bucket<K,V>> ();
 		
 		for(int i= 0 ; i < numberOfBuckets ; i++)
 			array.add(new MyBucket<K,V>());
@@ -26,7 +27,9 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 
 	@Override
 	public V get(K key) {
-		V value =  array.get(translate(key.hashCode())).getElement(key).getValue() ;
+		if(array.get(translate(key.hashCode())).getElement(key) == null)
+				return null ;
+		V value = array.get(translate(key.hashCode())).getElement(key).getValue();
 		return value ;
 	}
 
@@ -34,7 +37,7 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 	public V put(K key, V value) {
 		if(array == null)
 			array = new ArrayList<Bucket<K,V>>(numberOfBuckets);
-		array.get(translate(key.hashCode())).addEntry(key ,value);
+		array.get(translate(key.hashCode())).addEntry(key,value);
 		return null;
 	}
 
@@ -50,10 +53,6 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 		return value;
 	}
 	
-	
-	public int getDefinitionsCount(K key){
-		return array.get(translate(key.hashCode())).getNumberOfDefinitions(key);
-	}
 
 	@Override
 	public int size() {

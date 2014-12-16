@@ -8,7 +8,7 @@ import hashMap.MyHashMap.Entry;
 
 public class MyBucket<K,V> implements Bucket<K,V>{
 
-	private ArrayList<Entry<K, V>> words = new ArrayList<MyHashMap.Entry<K,V>>();
+	private ArrayList<Entry<K,V>> words = new ArrayList<Entry<K,V>>();
 	
 	@Override
 	public List<? extends hashMap.MyHashMap.Entry<K, V>> getEntries() {
@@ -17,57 +17,46 @@ public class MyBucket<K,V> implements Bucket<K,V>{
 
 	
 	@Override
-	public Entry<K, V> getElement(K key) {	
-		return words.get(0);
+	public Entry<K, V> getElement(K key) {
+		for(Entry<K,V> aux :words){
+			if(aux.getKey().equals(key))
+				return aux;
+		}
+		return null;	
 	}
 
 	@Override
 	public void addEntry(final K key, final V value ) {
 		
-		Entry<K, V> to_add = new Entry<K, V>() {
-
-			@Override
-			public K getKey() {
-				return key ;
-			}
-
-			@Override
-			public V getValue() {	
-				return value ;
-			}
-		};
-		for(Entry<K,V> e :words)
-			if(e.getKey().equals(key) && e.getValue().equals(value))
-				//the object already exists so there is no need
-				//to add another one like it
-				return;
-		
+		Entry<K,V> to_add = new MyEntry<K, V>(key, value);
 		words.add(to_add); // add an entry to the bucket			
 	}
 	
 	
 	@Override
 	public V remove(K key) {
-		Entry<K,V> entry = words.remove(0);
+		/*
+		 * Because we could have more than one word 
+		 * in a bucket we must identify the word to be
+		 * delted
+		 */
+		Entry<K,V> to_delete = null ;
+		for(Entry<K,V> aux : words){
+			if(aux.getKey().equals(key))
+				 to_delete = aux ;
+				 words.remove(aux);
+		}
 		
-		//remove the rest of the words if there are any with 
-		//the same values as the one deleted ;
-		
-		return entry.getValue();
+		return to_delete.getValue();
 	}
 
 
 
 	@Override
 	public int getSize() {
-		return words.size() ;
-	}
-
-	@Override
-	public int getNumberOfDefinitions(K key) {
-		//here we are sure that we do not have duplicates
 		return words.size();
 	}
+
 	
 
 }
