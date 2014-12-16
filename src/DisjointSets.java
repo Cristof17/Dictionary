@@ -31,11 +31,38 @@ public class DisjointSets<T> {
 	}
 	
 	public void mergeSetsOf(T e1, T e2) {
-
+		int index1 = getIndexOf(e1);
+		int index2 = getIndexOf(e2);
+		
+		changeIndexes(index1 ,index2);
 	}
 	
 	public ArrayList<T> setOf(T elem) {
 		return null;
 	}
+	
+	private int getIndexOf(T element){
+		for(Entry<T> aux : elements){
+			if(aux.element.equals(element))
+				return aux.setIndex;
+		}
+		return Integer.MIN_VALUE ;
+	}
+	
+	private void changeIndexes(int index1 , int index2 ){
+		
+		int minIndex = Math.min(index1, index2);
+		int maxIndex = Math.max(index1, index2);
+				
+		for(Entry<T> aux : elements)
+			if(aux.setIndex == maxIndex){
+				
+				aux.setIndex = minIndex;
+				
+				indexes.remove(aux.element);
+				indexes.put(aux.element,minIndex);
+			}
+	}
+	
 	
 }
