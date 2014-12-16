@@ -1,4 +1,5 @@
 import hashMap.MyHashMap;
+import hashMap.MyHashMapImpl;
 
 import java.util.ArrayList;
 
@@ -16,10 +17,17 @@ public class DisjointSets<T> {
  	}
 	
 	public DisjointSets() {
-		
 	}
+	
+	public DisjointSets(int length ){
+		this.indexes = new MyHashMapImpl<T, Integer>(length);
+	}
+	
+	
 	public void addElement(T elem) {
 		Entry<T> new_entry = new Entry<T>(elem);
+		elements.add(new_entry);
+		indexes.put(new_entry.element, new_entry.setIndex);
 	}
 	
 	public void mergeSetsOf(T e1, T e2) {
