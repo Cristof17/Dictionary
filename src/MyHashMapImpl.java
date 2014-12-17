@@ -11,6 +11,10 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 		initializeArray();
 	}
 	
+	/**This method is used to instantiate every Bucket object
+	 * from the Buckets Array 
+	 * 
+	 */
 	private void initializeArray() {
 		
 		if(array == null)
@@ -57,6 +61,13 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 		return array;
 	}
 	
+	
+	/**Method which returns narrows the limits of values an index
+	 * in the array can have based on the length of the array
+	 * 
+	 * @param hashCode The big number to be trimmed down
+	 * @return The trimmed down index
+	 */
 	private int translate(int hashCode){
 		return Math.abs(hashCode ) % numberOfBuckets; 
 	}
@@ -72,11 +83,16 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 			this.definition = value ;
 		}
 		
-		
+		/**This method returns the key associated with this Entry object
+		 * 
+		 */
 		public K getKey() {
 			return key;
 		}
 
+		/**
+		 * This method returns the value associated with this Entry object
+		 */
 		public V getValue() {
 			return definition;
 		}
