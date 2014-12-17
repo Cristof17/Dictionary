@@ -31,9 +31,15 @@ public class Dictionary {
 	}
 	
 	
-	
+	/**
+	 * This method reads the query File , processes every query
+	 * and then outputs the results to the file created from the
+	 * path given as parameter 
+	 * 
+	 * @param fisierInterogari The query file from which every query is read  
+	 * @param output_path The output file path 
+	 */
 	private void readQuery(File fisierInterogari,String output_path) {
-		
 		
 		try {
 			
@@ -50,13 +56,11 @@ public class Dictionary {
 				case 0:
 					String definitions = getDefinition(sc.next());
 					writer.write(definitions +"\n");
-//					System.out.println(definitions);
 					break;
 				case 1:
 					String value = sc.next();
 					int numberOfDefinitions = getNumberOfDefinitions(value);
 					writer.write(numberOfDefinitions+"\n");
-//					System.out.println(numberOfDefinitions);
 					break;
 				case 2:
 					String element = sc.next();
@@ -64,10 +68,8 @@ public class Dictionary {
 					Collections.sort(synonyms);
 					for(String s : synonyms){
 							writer.write(s+" ");
-//							System.out.print(s+" ");
 					}
 					writer.write("\n");
-//					System.out.print("\r\n");
 					break;
 
 				default:
@@ -91,7 +93,12 @@ public class Dictionary {
 	}
 
 
-
+	/**This method reads the Dictionary content file and 
+	 * puts the data into a HashMap data structure 
+	 * 
+	 * @param hashMap  The hashMap data structure in which data is inserted
+	 * @param file The file from which data is read
+	 */
 	private void readDefinitions(MyHashMapImpl<String,ArrayList<String>> hashMap ,File file){
 		FileReader stream = null;
 		
@@ -165,6 +172,12 @@ public class Dictionary {
 		
 	}	
 
+	/**This method returns the definitions  of a word
+	 * in dictionary based on its key 
+	 * 
+	 * @param key The key for which to get the definitions
+	 * @return The definitions of the word searched by key
+	 */
 	private String getDefinition(String key ){
 		ArrayList<String >definitions = hashMap.get(key);
 		if(definitions == null)
@@ -173,7 +186,14 @@ public class Dictionary {
 		return definitions.get(0);
 		
 	}
+
 	
+	/**This method returns the number of definitions
+	 * a word can have in the dictionary
+	 * 
+	 * @param key The key used to get the definitions of a word
+	 * @return The number of definitions a word can have
+	 */
 	private int getNumberOfDefinitions(String key){
 		ArrayList<String> definitions = hashMap.get(key);
 		
@@ -182,16 +202,34 @@ public class Dictionary {
 		return hashMap.get(key).size();
 	}
 	
-	
+	/**This method returns the synonyms of a word from the Dictionary 
+	 * 
+	 * @param element The String word to search for in the Dictionary
+	 * @return The ArrayList containing all the synonyms of the word sent as parameter
+	 */
 	private ArrayList<String> getSynonyms(String element){
 		return sets.setOf(element);
 	}
 	
+	/**This method is a wrapper onto readDefinitions method
+	 * in order for a Dictionary object to call this method and
+	 * to trigger the start of populating the hashMap 
+	 * 
+	 * @param file_path The path of the configuration file
+	 */
 	public void readDefinitionsFromFile(String file_path){
 		File fisierLista = new File(file_path);
 		readDefinitions(hashMap, fisierLista);
 	}
 	
+	/**This method is a wrapper onto readQuery method
+	 * in order for a Dictionary object to call this method and
+	 * to trigger the start of extracting data from hashMap
+	 * based on the Query file
+	 * 
+	 * @param file_path The path of the Query file
+	 * @param output_path The path of the output file where the data processed is to be inserted
+	 */
 	public void executeQueriesFromFile(String file_path ,String output_path){
 		File fisierInterogari = new File(file_path);
 		readQuery(fisierInterogari,output_path);
