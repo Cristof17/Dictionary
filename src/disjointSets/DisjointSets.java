@@ -1,3 +1,4 @@
+package disjointSets;
 import hashMap.MyHashMap;
 import hashMap.MyHashMapImpl;
 
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 public class DisjointSets<T> {
 	private ArrayList<Entry<T>> elements;
 	private MyHashMap<T, Integer> indexes; 
+	private int length;
 	
 	private class Entry<T> {
 		public T element;
@@ -17,10 +19,13 @@ public class DisjointSets<T> {
  	}
 	
 	public DisjointSets() {
+		
 	}
 	
 	public DisjointSets(int length ){
 		this.indexes = new MyHashMapImpl<T, Integer>(length);
+		this.elements = new ArrayList<Entry<T>>();
+		this.length = length;
 	}
 	
 	
@@ -38,7 +43,14 @@ public class DisjointSets<T> {
 	}
 	
 	public ArrayList<T> setOf(T elem) {
-		return null;
+		int indexOfElement = indexes.get(elem);
+		ArrayList<T> set = new ArrayList<T>();
+		
+		for(Entry<T> aux : elements)
+			if(aux.setIndex == indexOfElement)
+				set.add(aux.element);
+			
+		return set;
 	}
 	
 	private int getIndexOf(T element){
@@ -56,13 +68,10 @@ public class DisjointSets<T> {
 				
 		for(Entry<T> aux : elements)
 			if(aux.setIndex == maxIndex){
-				
 				aux.setIndex = minIndex;
-				
 				indexes.remove(aux.element);
-				indexes.put(aux.element,minIndex);
+				indexes.put(aux.element ,aux.setIndex);
 			}
 	}
-	
 	
 }

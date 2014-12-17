@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import disjointSets.DisjointSets;
+
 public class Dictionary {
 
 	private String[] args;
@@ -16,11 +18,15 @@ public class Dictionary {
 	private File fisierInterogari ;
 	private File fisierOut ;
 	private MyHashMapImpl<String,ArrayList<String>> hashMap;
+	private DisjointSets<String> sets ;
 	
 	public Dictionary(String[] args){
 		
+		
+		
 		this.args = args ;
 		this.hashMap = new MyHashMapImpl<String,ArrayList<String>>(Integer.parseInt(args[0]));
+		this.sets = new DisjointSets<String>(Integer.parseInt(args[0]));
 		
 		this.fisierLista = new File(args[1]);
 		this.fisierInterogari = new File(args[2]);
@@ -28,7 +34,6 @@ public class Dictionary {
 		
 		readDefinitions(hashMap, fisierLista);
 		readQuery(fisierInterogari);
-		
 		
 	}
 	
@@ -52,6 +57,11 @@ public class Dictionary {
 					System.out.println(getNumberOfDefinitions(sc.next()));
 					break;
 				case 2:
+					String element = sc.next();
+					ArrayList<String> synonyms = getSynonyms(element);
+					for(String s: synonyms){
+						System.out.println("Element e are sinonim "+s);
+					}
 					break;
 
 				default:
@@ -121,8 +131,19 @@ public class Dictionary {
 					ArrayList<String> definitions = new ArrayList<String>();
 					definitions.add(definition);
 					hashMap.put(word, definitions);
+					sets.addElement(word); 
 				}
 			
+			}
+			
+			for(int i = 0 ; i < M ; i++){
+				line_scanner = new Scanner(reader.readLine());
+				
+				String word1 = line_scanner.next();
+				String word2 = line_scanner.next();
+
+				sets.mergeSetsOf(word1, word2);				
+				
 			}
 			
 			reader.close();
@@ -151,5 +172,9 @@ public class Dictionary {
 		return hashMap.get(key).size();
 	}
 	
+	
+	private ArrayList<String> getSynonyms(String element){
+		return sets.setOf(element);
+	}
 	
 }

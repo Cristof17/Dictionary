@@ -38,15 +38,13 @@ public class MyBucket<K,V> implements Bucket<K,V>{
 		/*
 		 * Because we could have more than one word 
 		 * in a bucket we must identify the word to be
-		 * delted
+		 * deleted
 		 */
-		Entry<K,V> to_delete = null ;
+		Entry<K,V> to_delete = null  ;
 		for(Entry<K,V> aux : words){
 			if(aux.getKey().equals(key))
 				 to_delete = aux ;
-				 words.remove(aux);
 		}
-		
 		return to_delete.getValue();
 	}
 
