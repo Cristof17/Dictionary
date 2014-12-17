@@ -47,9 +47,6 @@ public class MyHashMapImpl<K, V> implements MyHashMap<K, V>{
 		Bucket<K,V> bucket = array.get(position);
 		
 		V value = bucket.remove(key);
-		while(bucket.getSize() != 0)
-			bucket.remove(key);
-		
 		return value;
 	}
 	

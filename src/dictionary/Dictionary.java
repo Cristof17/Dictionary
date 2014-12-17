@@ -59,8 +59,12 @@ public class Dictionary {
 				case 2:
 					String element = sc.next();
 					ArrayList<String> synonyms = getSynonyms(element);
-					for(String s: synonyms){
-						System.out.println("Element e are sinonim "+s);
+					System.out.println("Synonyms for " +element);
+					for(int j = 0 ; j < synonyms.size() ; j++){
+						if(j == synonyms.size() -1){
+							System.out.println(synonyms.get(j-1)+" ");
+						}else
+							System.out.print(synonyms.get(j)+" ");
 					}
 					break;
 

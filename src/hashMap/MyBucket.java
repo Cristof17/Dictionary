@@ -40,12 +40,12 @@ public class MyBucket<K,V> implements Bucket<K,V>{
 		 * in a bucket we must identify the word to be
 		 * deleted
 		 */
-		Entry<K,V> to_delete = null  ;
-		for(Entry<K,V> aux : words){
-			if(aux.getKey().equals(key))
-				 to_delete = aux ;
+		
+		for(int i = 0 ; i < words.size() ;i ++){
+			if(words.get(i).getKey().equals(key))
+				return words.remove(i).getValue();
 		}
-		return to_delete.getValue();
+		return null;
 	}
 
 
