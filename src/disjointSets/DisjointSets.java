@@ -47,7 +47,7 @@ public class DisjointSets<T> {
 		ArrayList<T> set = new ArrayList<T>();
 		
 		for(Entry<T> aux : elements)
-			if(aux.setIndex == indexOfElement)
+			if(aux.setIndex == indexOfElement && !aux.element.equals(elem))
 				set.add(aux.element);
 			
 		return set;

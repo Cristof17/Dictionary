@@ -3,47 +3,45 @@ package dictionary;
 import hashMap.MyHashMapImpl;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import disjointSets.DisjointSets;
 
 public class Dictionary {
 
-	private String[] args;
-	private File fisierLista;
-	private File fisierInterogari ;
-	private File fisierOut ;
+	private int size ;
 	private MyHashMapImpl<String,ArrayList<String>> hashMap;
 	private DisjointSets<String> sets ;
 	
-	public Dictionary(String[] args){
+	public Dictionary(int size){
 		
 		
+		this.size = size;
+		this.hashMap = new MyHashMapImpl<String,ArrayList<String>>(size);
+		this.sets = new DisjointSets<String>(size);
 		
-		this.args = args ;
-		this.hashMap = new MyHashMapImpl<String,ArrayList<String>>(Integer.parseInt(args[0]));
-		this.sets = new DisjointSets<String>(Integer.parseInt(args[0]));
-		
-		this.fisierLista = new File(args[1]);
-		this.fisierInterogari = new File(args[2]);
-		this.fisierOut = new File(args[3]);
-		
-		readDefinitions(hashMap, fisierLista);
-		readQuery(fisierInterogari);
+
 		
 	}
 	
 	
 	
-	private void readQuery(File fisierInterogari) {
+	private void readQuery(File fisierInterogari,String output_path) {
+		
+		
 		try {
 			
-			FileReader stream = new FileReader(fisierInterogari);
-			BufferedReader reader = new BufferedReader(stream);
+			FileReader stream_in = new FileReader(fisierInterogari);
+			BufferedReader reader = new BufferedReader(stream_in);
+			FileWriter stream_out = new FileWriter(output_path);
+			BufferedWriter writer = new BufferedWriter(stream_out);
 			
 			int Q = Integer.parseInt(reader.readLine());
 			Scanner sc = null ;
@@ -51,21 +49,26 @@ public class Dictionary {
 				 sc = new Scanner(reader.readLine());
 				switch (sc.nextInt()) {
 				case 0:
-					System.out.println(getDefinition(sc.next()));
+					String definitions = getDefinition(sc.next());
+					writer.write(definitions +"\r\n");
+					System.out.println(definitions);
 					break;
 				case 1:
-					System.out.println(getNumberOfDefinitions(sc.next()));
+					String value = sc.next();
+					int numberOfDefinitions = getNumberOfDefinitions(value);
+					writer.write(numberOfDefinitions+"\r\n");
+					System.out.println(numberOfDefinitions);
 					break;
 				case 2:
 					String element = sc.next();
 					ArrayList<String> synonyms = getSynonyms(element);
-					System.out.println("Synonyms for " +element);
-					for(int j = 0 ; j < synonyms.size() ; j++){
-						if(j == synonyms.size() -1){
-							System.out.println(synonyms.get(j-1)+" ");
-						}else
-							System.out.print(synonyms.get(j)+" ");
+					Collections.sort(synonyms);
+					for(String s : synonyms){
+							writer.write(s+" ");
+							System.out.print(s+" ");
 					}
+					writer.write("\r\n");
+					System.out.print("\r\n");
 					break;
 
 				default:
@@ -74,11 +77,15 @@ public class Dictionary {
 			
 			}
 		
+			writer.flush();
+			
 			sc.close();
+			writer.close();
+			stream_out.close();
 			reader.close();
+			stream_in.close();
 			
 		} catch (NumberFormatException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -181,4 +188,13 @@ public class Dictionary {
 		return sets.setOf(element);
 	}
 	
+	public void readDefinitionsFromFile(String file_path){
+		File fisierLista = new File(file_path);
+		readDefinitions(hashMap, fisierLista);
+	}
+	
+	public void executeQueriesFromFile(String file_path ,String output_path){
+		File fisierInterogari = new File(file_path);
+		readQuery(fisierInterogari,output_path);
+	}
 }
