@@ -1,6 +1,6 @@
-package dictionary;
 
-import hashMap.MyHashMapImpl;
+
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import disjointSets.DisjointSets;
 
 public class Dictionary {
 
@@ -50,14 +49,14 @@ public class Dictionary {
 				switch (sc.nextInt()) {
 				case 0:
 					String definitions = getDefinition(sc.next());
-					writer.write(definitions +"\r\n");
-					System.out.println(definitions);
+					writer.write(definitions +"\n");
+//					System.out.println(definitions);
 					break;
 				case 1:
 					String value = sc.next();
 					int numberOfDefinitions = getNumberOfDefinitions(value);
-					writer.write(numberOfDefinitions+"\r\n");
-					System.out.println(numberOfDefinitions);
+					writer.write(numberOfDefinitions+"\n");
+//					System.out.println(numberOfDefinitions);
 					break;
 				case 2:
 					String element = sc.next();
@@ -65,10 +64,10 @@ public class Dictionary {
 					Collections.sort(synonyms);
 					for(String s : synonyms){
 							writer.write(s+" ");
-							System.out.print(s+" ");
+//							System.out.print(s+" ");
 					}
-					writer.write("\r\n");
-					System.out.print("\r\n");
+					writer.write("\n");
+//					System.out.print("\r\n");
 					break;
 
 				default:
