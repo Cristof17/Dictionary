@@ -47,7 +47,7 @@ public interface MyHashMap<K, V> {
 	/**
 	 * Intoarce lista de bucket-uri din tabela.
 	 * 
-	 * @return
+	 * @return Lista de bucket-uri
 	 */
 	public List<? extends Bucket<K, V>> getBuckets();
 	
@@ -65,14 +65,14 @@ public interface MyHashMap<K, V> {
 		/**
 		 * Intoarce cheia intrarii.
 		 * 
-		 * @return
+		 * @return Cheia intrarii
 		 */
 		public K getKey();
 		
 		/**
 		 * Intoarce valoarea intrarii.
 		 * 
-		 * @return
+		 * @return Valoarea intrarii
 		 */
 		public V getValue();
 	}
@@ -92,7 +92,7 @@ public interface MyHashMap<K, V> {
 		/**
 		 * Intoarce lista de intrari continute de acest bucket.
 		 * 
-		 * @return
+		 * @return Lista de intrari
 		 */
 		public List<? extends Entry<K, V>> getEntries();
 		
